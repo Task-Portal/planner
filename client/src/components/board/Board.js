@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../../styles.css";
 import { Link } from "react-router-dom";
 import Task from "../task/Task";
-import { Droppable } from "react-beautiful-dnd";
-import _ from "lodash";
 import { create, listTasks, updateManyTasks } from "../task/apiTask";
 import { isAuthenticated } from "../../auth";
 
@@ -56,14 +54,10 @@ const Board = ({ board }) => {
       <div className="columnTitle">
         <Link to={`/board/edit/${board._id}`}>{board.name} </Link>
       </div>
-      <Droppable droppableId={board._id}>
-        {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
-            <Task tasks={tasks} onAdd={onAdd} />
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
+      <div>
+        <Task tasks={tasks} onAdd={onAdd} />
+      </div>
+
       {error && <div>{error}</div>}
     </div>
   );
